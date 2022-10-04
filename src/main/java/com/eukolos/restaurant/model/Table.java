@@ -5,19 +5,37 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.List;
-import java.util.UUID;
 
-@Entity(name = "tablee")
+@Entity(name = "table_")
 public class Table {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    @OneToMany
-    private List<Account> account;
-
     private int number;
+
+    public Table() {
+    }
+
+    public Table(String id, int number) {
+        this.id = id;
+        this.number = number;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
 }
