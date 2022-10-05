@@ -1,14 +1,18 @@
 package com.eukolos.restaurant.service;
 
-import com.eukolos.restaurant.dto.AccountDto;
+
+import com.eukolos.restaurant.dto.AccountCreateResponse;
+import com.eukolos.restaurant.dto.AccountCreateResponseConverter;
 import com.eukolos.restaurant.model.Account;
 import com.eukolos.restaurant.model.Table;
 import com.eukolos.restaurant.repository.AccountRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AccountService {
+
     private final AccountRepository repository;
     private final TableService tableService;
 
@@ -17,22 +21,26 @@ public class AccountService {
         this.tableService = tableService;
     }
 
-    public AccountDto createAccount (int tableNumber){
-       ResponseEntity<Table> table = tableService.tableNumber(tableNumber);
-       Account account = new Account();
-       account.setActive(true);
-       account.setTable(table.getBody().getId());
-       Account response = repository.save(account);
+    public AccountCreateResponse createAccount(int createAccountByTableNumberRequest){
+        Optional<Account> isActive = repository.findByIsActive(true);
+        Table table = new Table();
+        table.setNumber(createAccountByTableNumberRequest);
+        Account account = new Account();
+        if (isActive.isEmpty()) {
+            account.setActive(true);
+            account.setTable(table);
 
-       AccountDto accountDto = new AccountDto();
-       accountDto.setId(response.getId());
-       accountDto.setIsActive(response.getActive());
-       accountDto.setTable(response.getTable());
-       accountDto.setCreatedAt(response.getCreatedAt());
-       accountDto.setUpdatedAt(response.getUpdatedAt());
-       return accountDto;
+            Account response = repository.save(account);
+
+            AccountCreateResponse response2 = response.AccountCreateResponseConverter::convert;
+
+        }
+
+
+
+        return new AccountCreateResponse();
+
     }
-
 
 
 }

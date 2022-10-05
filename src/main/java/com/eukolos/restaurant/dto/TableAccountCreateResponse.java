@@ -1,21 +1,19 @@
 package com.eukolos.restaurant.dto;
 
-import com.eukolos.restaurant.model.Table;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link Table} entity
+ * A DTO for the {@link com.eukolos.restaurant.model.Table} entity
  */
-public class TableDto implements Serializable {
+public class TableAccountCreateResponse implements Serializable {
     private String id;
     private int number;
 
-    public TableDto() {
+    public TableAccountCreateResponse() {
     }
 
-    public TableDto(String id, int number) {
+    public TableAccountCreateResponse(String id, int number) {
         this.id = id;
         this.number = number;
     }
@@ -24,7 +22,7 @@ public class TableDto implements Serializable {
         return id;
     }
 
-    public TableDto setId(String id) {
+    public TableAccountCreateResponse setId(String id) {
         this.id = id;
         return this;
     }
@@ -33,7 +31,7 @@ public class TableDto implements Serializable {
         return number;
     }
 
-    public TableDto setNumber(int number) {
+    public TableAccountCreateResponse setNumber(int number) {
         this.number = number;
         return this;
     }
@@ -42,7 +40,7 @@ public class TableDto implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TableDto entity = (TableDto) o;
+        TableAccountCreateResponse entity = (TableAccountCreateResponse) o;
         return Objects.equals(this.id, entity.id) &&
                 Objects.equals(this.number, entity.number);
     }

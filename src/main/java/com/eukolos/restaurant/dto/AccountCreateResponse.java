@@ -1,30 +1,25 @@
 package com.eukolos.restaurant.dto;
 
-import com.eukolos.restaurant.model.Account;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link Account} entity
+ * A DTO for the {@link com.eukolos.restaurant.model.Account} entity
  */
-public class AccountDto implements Serializable {
+public class AccountCreateResponse implements Serializable {
     private String id;
     private Boolean isActive;
-    private List<List<String>> product;
-    private String table;
+    private TableAccountCreateResponse table;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public AccountDto() {
+    public AccountCreateResponse() {
     }
 
-    public AccountDto(String id, Boolean isActive, List<List<String>> product, String table, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public AccountCreateResponse(String id, Boolean isActive, TableAccountCreateResponse table, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.isActive = isActive;
-        this.product = product;
         this.table = table;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -34,7 +29,7 @@ public class AccountDto implements Serializable {
         return id;
     }
 
-    public AccountDto setId(String id) {
+    public AccountCreateResponse setId(String id) {
         this.id = id;
         return this;
     }
@@ -43,25 +38,16 @@ public class AccountDto implements Serializable {
         return isActive;
     }
 
-    public AccountDto setIsActive(Boolean isActive) {
+    public AccountCreateResponse setIsActive(Boolean isActive) {
         this.isActive = isActive;
         return this;
     }
 
-    public List<List<String>> getProduct() {
-        return product;
-    }
-
-    public AccountDto setProduct(List<List<String>> product) {
-        this.product = product;
-        return this;
-    }
-
-    public String getTable() {
+    public TableAccountCreateResponse getTable() {
         return table;
     }
 
-    public AccountDto setTable(String table) {
+    public AccountCreateResponse setTable(TableAccountCreateResponse table) {
         this.table = table;
         return this;
     }
@@ -70,7 +56,7 @@ public class AccountDto implements Serializable {
         return createdAt;
     }
 
-    public AccountDto setCreatedAt(LocalDateTime createdAt) {
+    public AccountCreateResponse setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
         return this;
     }
@@ -79,7 +65,7 @@ public class AccountDto implements Serializable {
         return updatedAt;
     }
 
-    public AccountDto setUpdatedAt(LocalDateTime updatedAt) {
+    public AccountCreateResponse setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -88,10 +74,9 @@ public class AccountDto implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AccountDto entity = (AccountDto) o;
+        AccountCreateResponse entity = (AccountCreateResponse) o;
         return Objects.equals(this.id, entity.id) &&
                 Objects.equals(this.isActive, entity.isActive) &&
-                Objects.equals(this.product, entity.product) &&
                 Objects.equals(this.table, entity.table) &&
                 Objects.equals(this.createdAt, entity.createdAt) &&
                 Objects.equals(this.updatedAt, entity.updatedAt);
@@ -99,7 +84,7 @@ public class AccountDto implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, isActive, product, table, createdAt, updatedAt);
+        return Objects.hash(id, isActive, table, createdAt, updatedAt);
     }
 
     @Override
@@ -107,7 +92,6 @@ public class AccountDto implements Serializable {
         return getClass().getSimpleName() + "(" +
                 "id = " + id + ", " +
                 "isActive = " + isActive + ", " +
-                "product = " + product + ", " +
                 "table = " + table + ", " +
                 "createdAt = " + createdAt + ", " +
                 "updatedAt = " + updatedAt + ")";

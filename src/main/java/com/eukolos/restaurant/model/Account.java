@@ -1,6 +1,5 @@
 package com.eukolos.restaurant.model;
 
-import com.eukolos.restaurant.utils.StringListConverter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -8,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Account {
@@ -18,27 +18,29 @@ public class Account {
 
     private Boolean isActive;
 
-    @Convert(converter = StringListConverter.class)
-    private List<String> product;
+    @ManyToOne
+    @JoinColumn(name = "table_id")
+    private Table table;
 
-    private String tablee;
-
+    @ManyToMany
+    private List<Product> products;
 
     @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
 
     public Account() {
     }
 
-    public Account(String id, Boolean isActive, List<String> product, String table, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Account(String id, Boolean isActive, Table table, List<Product> products, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.isActive = isActive;
-        this.product = product;
-        this.tablee = table;
+        this.table = table;
+        this.products = products;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -59,20 +61,20 @@ public class Account {
         isActive = active;
     }
 
-    public List<String> getProduct() {
-        return product;
+    public Table getTable() {
+        return table;
     }
 
-    public void setProduct(List<String> product) {
-        this.product = product;
+    public void setTable(Table table) {
+        this.table = table;
     }
 
-    public String getTable() {
-        return tablee;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setTable(String table) {
-        this.tablee = table;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -89,5 +91,30 @@ public class Account {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Account)) return false;
+        Account account = (Account) o;
+        return Objects.equals(id, account.id) && Objects.equals(isActive, account.isActive) && Objects.equals(table, account.table) && Objects.equals(products, account.products) && Objects.equals(createdAt, account.createdAt) && Objects.equals(updatedAt, account.updatedAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, isActive, table, products, createdAt, updatedAt);
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id='" + id + '\'' +
+                ", isActive=" + isActive +
+                ", table=" + table +
+                ", products=" + products +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }

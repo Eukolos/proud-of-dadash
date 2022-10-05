@@ -1,26 +1,37 @@
 package com.eukolos.restaurant.service;
 
-import com.eukolos.restaurant.dto.TableDto;
+import com.eukolos.restaurant.dto.AllTableResponse;
+import com.eukolos.restaurant.dto.AllTableResponseConverter;
 import com.eukolos.restaurant.model.Table;
 import com.eukolos.restaurant.repository.TableRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TableService {
     private final TableRepository repository;
+    private final AllTableResponseConverter allTableResponseConverter;
 
-    public TableService(TableRepository repository) {
+    public TableService(TableRepository repository, AllTableResponseConverter allTableResponseConverter) {
         this.repository = repository;
+        this.allTableResponseConverter = allTableResponseConverter;
     }
 
-    public ResponseEntity<Table> tableNumber(int tableNumber) {
-        Optional<Table> table = repository.findByNumber(tableNumber);
-        if (table.isPresent()) {
-            return ResponseEntity.ok(table.get());
-        }
-        return null;
+    public List<AllTableResponse> getAllTable(){
+        List<Table> tableList = repository.findAll();
+
+        List<AllTableResponse> Response = tableList.stream().map(allTableResponseConverter::convert).collect(Collectors.toList());
+        return Response;
+
     }
+
+
+
+ //   public TableResponse getTableById(String id) {return null }
+
+
+
+
 }
