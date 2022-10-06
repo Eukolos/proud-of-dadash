@@ -9,5 +9,6 @@ public interface TableRepository  extends JpaRepository<Table, String> {
 
     @Override
     Optional<Table> findById(String id);
+    Table findByNumber(int Number);
 
 }

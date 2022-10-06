@@ -18,7 +18,7 @@ public class Account {
 
     private Boolean isActive;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinColumn(name = "table_id")
     private Table table;
 

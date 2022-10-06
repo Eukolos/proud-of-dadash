@@ -1,10 +1,9 @@
 package com.eukolos.restaurant.controler;
 
 import com.eukolos.restaurant.dto.AllTableResponse;
+import com.eukolos.restaurant.model.Table;
 import com.eukolos.restaurant.service.TableService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,9 +17,12 @@ public class TableController {
     }
     @GetMapping
     public List<AllTableResponse> getAllTable() {
-
-
         return service.getAllTable();
+    }
+
+    @PostMapping("/create/{createAccountByTableNumberRequest}")
+    public Table postAccountOnTable(@PathVariable int createAccountByTableNumberRequest){
+       return service.createAccountOnTable(createAccountByTableNumberRequest);
     }
 
 }
