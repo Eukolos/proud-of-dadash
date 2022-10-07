@@ -1,6 +1,5 @@
 package com.eukolos.restaurant.controler;
 
-import com.eukolos.restaurant.dto.AccountCreateResponse;
 import com.eukolos.restaurant.model.Account;
 import com.eukolos.restaurant.service.AccountService;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +18,7 @@ public class AccountController {
     }
 
     @PostMapping("/create/{createAccountByTableNumberRequest}")
-    public Account newAccount(@PathVariable int createAccountByTableNumberRequest){
-       return service.createAccount(createAccountByTableNumberRequest);
+    public Account createAccount(@PathVariable int createAccountByTableNumberRequest){
+        return new Account();
     };
 }
