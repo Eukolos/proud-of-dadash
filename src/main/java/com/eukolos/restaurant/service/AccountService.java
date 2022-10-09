@@ -1,8 +1,7 @@
 package com.eukolos.restaurant.service;
 
 
-import com.eukolos.restaurant.dto.AccountDto;
-import com.eukolos.restaurant.dto.AccountDtoConverter;
+import com.eukolos.restaurant.dto.*;
 import com.eukolos.restaurant.model.Account;
 import com.eukolos.restaurant.repository.AccountRepository;
 import org.springframework.stereotype.Service;
@@ -14,10 +13,12 @@ import java.util.Optional;
 @Service
 public class AccountService {
     private final AccountRepository repository;
+    private final ProductService productService;
     private final AccountDtoConverter accountDtoConverter;
 
-    public AccountService(AccountRepository repository, AccountDtoConverter accountDtoConverter) {
+    public AccountService(AccountRepository repository, ProductService productService, AccountDtoConverter accountDtoConverter) {
         this.repository = repository;
+        this.productService = productService;
         this.accountDtoConverter = accountDtoConverter;
     }
 
@@ -50,6 +51,19 @@ public class AccountService {
         return accountDtoList;
     }
 
+    public AccountDto addProduct(ProductAddRequest addProductRequest){
+        ProductOrderRequest productOrderRequest = ProductOrderRequest.builder()
+                .id(addProductRequest.getProductId())
+                .amount(addProductRequest.getAmount())
+                .build();
+        ProductDto productDto = productService.orderProduct(productOrderRequest);
+        Account account = repository.findById(addProductRequest.getAccountId()).orElse(null);
+
+
+
+
+        return new AccountDto();
+    }
 
 
 
