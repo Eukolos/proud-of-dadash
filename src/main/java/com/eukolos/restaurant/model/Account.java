@@ -22,6 +22,8 @@ public class Account {
 
     private Boolean isActive;
 
+    private int tableNumber;
+
     @ManyToMany
     private List<Product> products;
 
