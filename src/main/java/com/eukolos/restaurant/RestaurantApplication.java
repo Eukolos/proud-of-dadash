@@ -9,16 +9,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.Arrays;
 
 @SpringBootApplication
-public class RestaurantApplication implements CommandLineRunner {
-
-    public static void main(String[] args) {
-        SpringApplication.run(RestaurantApplication.class, args);
-    }
+public class RestaurantApplication implements CommandLineRunner{
 
     private final ProductRepository productRepository;
 
     public RestaurantApplication(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(RestaurantApplication.class, args);
     }
 
     @Override

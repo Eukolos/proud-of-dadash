@@ -8,6 +8,8 @@ import com.eukolos.restaurant.model.Product;
 import com.eukolos.restaurant.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,15 +32,25 @@ public class ProductService {
         return productDtoConverter.convert(response);
     }
 
-    public ProductDto orderProduct (ProductOrderRequest productOrderRequest){
+    public List<ProductDto> getAllProduct() {
+        List<Product> productList = repository.findAll();
+
+        List<ProductDto> productDtoList = new ArrayList<>();
+            for (Product product: productList) {
+                productDtoList.add(productDtoConverter.convert(product));
+    }
+    return productDtoList;
+    }
+
+    public Product orderProduct (ProductOrderRequest productOrderRequest){
         Product mainProduct = repository.findById(productOrderRequest.getId()).orElse(null);
         Product product = Product.builder()
                 .name(mainProduct.getName())
                 .price(mainProduct.getPrice())
-                .amount(mainProduct.getAmount())
+                .amount(productOrderRequest.getAmount())
                 .build();
         Product response = repository.save(product);
 
-        return productDtoConverter.convert(response);
+        return response;
     }
 }

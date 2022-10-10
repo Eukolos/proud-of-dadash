@@ -1,7 +1,7 @@
 package com.eukolos.restaurant.controler;
 
 import com.eukolos.restaurant.dto.AccountDto;
-import com.eukolos.restaurant.model.Account;
+import com.eukolos.restaurant.dto.ProductAddRequest;
 import com.eukolos.restaurant.service.AccountService;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,4 +31,8 @@ public class AccountController {
     public List<AccountDto> getAllAccountOnTable(@PathVariable int getTable){
         return service.getAllAccountOnTable(getTable);
     }
+    @PostMapping("/order")
+    public AccountDto order(@RequestBody ProductAddRequest productAddRequest){
+        return service.addProduct(productAddRequest);
+    };
 }
