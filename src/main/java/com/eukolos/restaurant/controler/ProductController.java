@@ -5,6 +5,8 @@ import com.eukolos.restaurant.dto.ProductCreateRequest;
 import com.eukolos.restaurant.dto.ProductDto;
 import com.eukolos.restaurant.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,13 +19,13 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ProductDto createProduct(@RequestBody @Valid ProductCreateRequest productCreateRequest) {
-        return productService.createProduct(productCreateRequest);
+    public ResponseEntity<ProductDto> createProduct(@RequestBody @Valid ProductCreateRequest productCreateRequest) {
+        return new ResponseEntity<>(productService.createProduct(productCreateRequest), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<ProductDto> getAllProduct(){
-        return productService.getAllProduct();
+    public ResponseEntity<List<ProductDto>> getAllProduct(){
+        return ResponseEntity.ok(productService.getAllProduct());
     }
 
 
