@@ -7,6 +7,7 @@ import com.eukolos.restaurant.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ProductDto createProduct(@RequestBody ProductCreateRequest productCreateRequest) {
+    public ProductDto createProduct(@RequestBody @Valid ProductCreateRequest productCreateRequest) {
         return productService.createProduct(productCreateRequest);
     }
 
