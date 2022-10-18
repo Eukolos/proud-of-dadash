@@ -23,15 +23,13 @@ private final ProductDtoConverter productDtoConverter;
            productDtoList.add(productDtoConverter.convert(product));
         }
 
-         AccountDto accountDto = AccountDto.builder()
-                .id(account.getId())
-                .isActive(account.getIsActive())
-                .tableNumber(account.getTableNumber())
-                .createdAt(account.getCreatedAt())
-                .updatedAt(account.getUpdatedAt())
-                .products(productDtoList)
-                .build();
-
-        return accountDto;
+        return AccountDto.builder()
+               .id(account.getId())
+               .isActive(account.getIsActive())
+               .tableNumber(account.getTableNumber())
+               .createdAt(account.getCreatedAt())
+               .updatedAt(account.getUpdatedAt())
+               .products(productDtoList)
+               .build();
     }
 }
