@@ -16,6 +16,16 @@ private final ProductDtoConverter productDtoConverter;
     }
 
 
+    public List<AccountDto> convertAll(List<Account> accounts) {
+        
+        //return accounts.stream().map(this::convert).collect(Collectors.toList());
+        List<AccountDto> accountDtoList = new ArrayList<>();
+        for (Account account: accountList) {
+            accountDtoList.add(convert(account));
+        }
+        return accountDtoList;
+    }
+
     public AccountDto convert(Account account){
         List<ProductDto> productDtoList = new ArrayList<>();
         if(account.getProducts() != null)

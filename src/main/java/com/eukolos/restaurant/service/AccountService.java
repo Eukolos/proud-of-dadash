@@ -29,11 +29,9 @@ public class AccountService {
     }
 
     public List<AccountDto> getAllAccount(){
+        // https://vladmihalcea.com/spring-data-findall-anti-pattern/
         List<Account> accountList = repository.findAll();
-        List<AccountDto> accountDtoList = new ArrayList<>();
-        for (Account account: accountList) {
-            accountDtoList.add(accountDtoConverter.convert(account));
-        }
+        return accountDtoConverter.convertAll(accountList)
 
         return accountDtoList;
     }
