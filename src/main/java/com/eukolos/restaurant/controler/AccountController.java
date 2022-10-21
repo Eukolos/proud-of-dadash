@@ -6,6 +6,7 @@ import com.eukolos.restaurant.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,8 +20,9 @@ public class AccountController {
     private final AccountService service;
 
     @PostMapping("/create/{createAccountRequest}")
-    public ResponseEntity<AccountDto> createAccount(@PathVariable int createAccountRequest){
-        return new ResponseEntity<>(service.createAccount(createAccountRequest), HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public AccountDto createAccount(@PathVariable int createAccountRequest){
+        return service.createAccount(createAccountRequest);
     }
 
     @GetMapping
