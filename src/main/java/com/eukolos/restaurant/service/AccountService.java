@@ -31,20 +31,15 @@ public class AccountService {
     public List<AccountDto> getAllAccount(){
         // https://vladmihalcea.com/spring-data-findall-anti-pattern/
         List<Account> accountList = repository.findAll();
-        return accountDtoConverter.convertAll(accountList)
+        return accountDtoConverter.convertAll(accountList);
 
-        return accountDtoList;
+       // return accountDtoList;
     }
 
     public List<AccountDto> getAllAccountOnTable(int tableRequest){
         List<Account> accountList = repository.findByTableNumber(tableRequest)
                 .orElseThrow(() -> new NotFoundException("Table's accounts did not found"));
-        List<AccountDto> accountDtoList = new ArrayList<>();
-        for (Account account: accountList) {
-            accountDtoList.add(accountDtoConverter.convert(account));
-        }
-
-        return accountDtoList;
+        return accountDtoConverter.convertAll(accountList);
     }
 
     public AccountDto addProduct(ProductAddRequest addProductRequest){

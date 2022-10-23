@@ -9,8 +9,6 @@ import com.eukolos.restaurant.model.Product;
 import com.eukolos.restaurant.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,11 +30,7 @@ public class ProductService {
     public List<ProductDto> getAllProduct() {
         List<Product> productList = repository.findAll();
 
-        List<ProductDto> productDtoList = new ArrayList<>();
-            for (Product product: productList) {
-                productDtoList.add(productDtoConverter.convert(product));
-    }
-    return productDtoList;
+        return productDtoConverter.convertAll(productList);
     }
 
     public Product orderProduct (ProductOrderRequest productOrderRequest){

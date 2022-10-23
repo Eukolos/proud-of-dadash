@@ -20,7 +20,7 @@ private final ProductDtoConverter productDtoConverter;
         
         //return accounts.stream().map(this::convert).collect(Collectors.toList());
         List<AccountDto> accountDtoList = new ArrayList<>();
-        for (Account account: accountList) {
+        for (Account account: accounts) {
             accountDtoList.add(convert(account));
         }
         return accountDtoList;

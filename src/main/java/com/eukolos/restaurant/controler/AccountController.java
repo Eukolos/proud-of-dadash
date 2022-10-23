@@ -5,7 +5,6 @@ import com.eukolos.restaurant.dto.ProductAddRequest;
 import com.eukolos.restaurant.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,17 +25,17 @@ public class AccountController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AccountDto>> getAllAccount(){
-        return ResponseEntity.ok(service.getAllAccount());
+    public List<AccountDto> getAllAccount(){
+        return service.getAllAccount();
     }
 
     @GetMapping("/{getTable}")
-    public ResponseEntity<List<AccountDto>> getAllAccountOnTable(@PathVariable int getTable){
-        return ResponseEntity.ok(service.getAllAccountOnTable(getTable));
+    public List<AccountDto> getAllAccountOnTable(@PathVariable int getTable){
+        return service.getAllAccountOnTable(getTable);
     }
 
     @PostMapping("/order")
-    public ResponseEntity<AccountDto> order(@RequestBody @Valid ProductAddRequest productAddRequest){
-        return ResponseEntity.ok(service.addProduct(productAddRequest));
+    public AccountDto order(@RequestBody @Valid ProductAddRequest productAddRequest){
+        return service.addProduct(productAddRequest);
     }
 }
