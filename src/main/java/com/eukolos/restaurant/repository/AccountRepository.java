@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, String> {
     Optional<Account> findByIsActive(Boolean isTrue);
-    Optional<List<Account>> findByTableNumber(int tableRequest);
+   List<Account> findByTableNumber(int tableRequest);
 }
 

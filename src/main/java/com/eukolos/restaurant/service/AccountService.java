@@ -37,8 +37,7 @@ public class AccountService {
     }
 
     public List<AccountDto> getAllAccountOnTable(int tableRequest){
-        List<Account> accountList = repository.findByTableNumber(tableRequest)
-                .orElseThrow(() -> new NotFoundException("Table's accounts did not found"));
+        List<Account> accountList = repository.findByTableNumber(tableRequest);
         return accountDtoConverter.convertAll(accountList);
     }
 
