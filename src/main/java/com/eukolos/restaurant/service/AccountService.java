@@ -7,9 +7,13 @@ import com.eukolos.restaurant.model.Account;
 import com.eukolos.restaurant.model.Product;
 import com.eukolos.restaurant.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,12 +32,21 @@ public class AccountService {
         return accountDtoConverter.convert(response);
     }
 
-    public List<AccountDto> getAllAccount(){
+    public List<AccountDto> getAllAccount(int pageNo, int pageSize){
         // https://vladmihalcea.com/spring-data-findall-anti-pattern/
-        List<Account> accountList = repository.findAll();
-        return accountDtoConverter.convertAll(accountList);
+        // List<Account> accountList = repository.findAll();
+        // return accountDtoConverter.convertAll(accountList);
 
-       // return accountDtoList;
+
+
+        Sort updateSort = Sort.by("updatedAt");
+        // create page request object
+        PageRequest pageRequest = PageRequest.of(pageNo, pageSize, updateSort.descending());
+        //pass it to repos
+        Page<Account> pagingAccount = repository.findAll(pageRequest);
+        //pagingAccount.hasContent(); -- to check pages are there or not
+        return accountDtoConverter.convertAll(pagingAccount.get().collect(Collectors.toList()));
+
     }
 
     public List<AccountDto> getAllAccountOnTable(int tableRequest){
