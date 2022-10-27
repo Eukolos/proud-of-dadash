@@ -1,10 +1,11 @@
 package com.eukolos.restaurant.controler;
 
 import com.eukolos.restaurant.dto.AccountDto;
+import com.eukolos.restaurant.dto.PaymentRequest;
+import com.eukolos.restaurant.dto.PaymentResponse;
 import com.eukolos.restaurant.dto.ProductAddRequest;
 import com.eukolos.restaurant.service.AccountService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.*;
@@ -43,5 +44,16 @@ public class AccountController {
     @PostMapping("/order")
     public AccountDto order(@RequestBody @Valid ProductAddRequest productAddRequest){
         return service.addProduct(productAddRequest);
+    }
+
+    @GetMapping("/bill/{accountId}")
+    public String getBill(@PathVariable String accountId){
+
+        return "total price: " + service.bill(accountId);
+    }
+
+    @PutMapping("/bill/payment")
+    public PaymentResponse payment(@RequestBody @Valid PaymentRequest paymentRequest){
+        return service.payment(paymentRequest);
     }
 }

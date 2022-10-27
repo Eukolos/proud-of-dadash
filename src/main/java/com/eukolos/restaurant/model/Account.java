@@ -23,6 +23,8 @@ public class Account {
 
     private int tableNumber;
 
+    private Double totalPrice;
+
     @ManyToMany
     private List<Product> products;
 

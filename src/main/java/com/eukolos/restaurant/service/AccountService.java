@@ -3,6 +3,7 @@ package com.eukolos.restaurant.service;
 
 import com.eukolos.restaurant.dto.*;
 import com.eukolos.restaurant.exception.NotFoundException;
+import com.eukolos.restaurant.exception.UnacceptablePaymentException;
 import com.eukolos.restaurant.model.Account;
 import com.eukolos.restaurant.model.Product;
 import com.eukolos.restaurant.repository.AccountRepository;
@@ -26,6 +27,7 @@ public class AccountService {
     public AccountDto createAccount(int createAccountRequest){
         Account account = new Account();
         account.setIsActive(true);
+        account.setTotalPrice(0.0);
         account.setTableNumber(createAccountRequest);
         Account response = repository.save(account);
 
@@ -70,23 +72,39 @@ public class AccountService {
                 .orElseThrow(() -> new NotFoundException("no account with this id:"+addProductRequest.getAccountId()+" was found" ));
         List<Product> products = account.getProducts();
         products.add(product);
+        account.setTotalPrice(account.getTotalPrice() + product.getPrice()*product.getAmount());
         account.setProducts(products);
         Account response = repository.save(account);
 
         return accountDtoConverter.convert(response);
     }
 
-    public void bill(String accountId){
+    public double bill(String accountId){
         Account account = repository.findById(accountId)
                 .orElseThrow(() -> new NotFoundException("no account with this id:"+accountId+" was found" ));
-        account.getProducts().stream().map(x -> {
-           Double deneme = x.getAmount()* x.getPrice();
-        }
-        );
 
-
-
+        return account.getTotalPrice();
     }
+
+    public PaymentResponse payment(PaymentRequest paymentRequest) {
+        Account account = repository.findById(paymentRequest.getAccountId())
+                .orElseThrow(() -> new NotFoundException("no account with this id:"+paymentRequest.getAccountId()+" was found" ));
+        account.setTotalPrice(account.getTotalPrice()- paymentRequest.getPayment());
+        PaymentResponse response = new PaymentResponse();
+        if (account.getTotalPrice() > 0) {
+            response.setStatement("part of the payment has been paid");
+            response.setBalance(account.getTotalPrice());
+            repository.save(account);
+        } else if (account.getTotalPrice() < 0) {
+            throw new UnacceptablePaymentException("Paying too much is unacceptable");
+        } else {
+            response.setStatement("Payment has been completed");
+            response.setBalance(account.getTotalPrice());
+            account.setIsActive(false);
+            repository.save(account);
+        }
+        return response;
+    };
 
 
 
