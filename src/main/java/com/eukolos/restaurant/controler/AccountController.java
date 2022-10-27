@@ -26,7 +26,7 @@ public class AccountController {
 
     @GetMapping
     public List<AccountDto> getAllAccount(){
-        return service.getAllAccount(0,5);
+        return service.getAllAccount();
     }
 
     @GetMapping("/{getTable}")
