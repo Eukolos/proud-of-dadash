@@ -4,6 +4,7 @@ import com.eukolos.restaurant.dto.AccountDto;
 import com.eukolos.restaurant.dto.ProductAddRequest;
 import com.eukolos.restaurant.service.AccountService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,13 @@ public class AccountController {
     }
 
     @GetMapping
-    public List<AccountDto> getAllAccount(){
-        return service.getAllAccount(0,5);
+    public List<AccountDto> getAllAccount(@RequestParam int pageNo, @RequestParam int pageSize){
+        return service.getAllAccount(pageNo, pageSize);
+    }
+
+    @GetMapping("/active")
+    public List<AccountDto> getAllActiveAccount(){
+        return service.getAllActiveAccount();
     }
 
     @GetMapping("/{getTable}")

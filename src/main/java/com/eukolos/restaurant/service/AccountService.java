@@ -33,10 +33,11 @@ public class AccountService {
     }
 
     public List<AccountDto> getAllAccount(int pageNo, int pageSize){
-        // https://vladmihalcea.com/spring-data-findall-anti-pattern/
-        // List<Account> accountList = repository.findAll();
-        // return accountDtoConverter.convertAll(accountList);
-
+       /*
+           https://vladmihalcea.com/spring-data-findall-anti-pattern/
+           List<Account> accountList = repository.findAll();
+           return accountDtoConverter.convertAll(accountList);
+       */
 
 
         Sort updateSort = Sort.by("updatedAt");
@@ -47,6 +48,11 @@ public class AccountService {
         //pagingAccount.hasContent(); -- to check pages are there or not
         return accountDtoConverter.convertAll(pagingAccount.get().collect(Collectors.toList()));
 
+    }
+
+    public List<AccountDto> getAllActiveAccount(){
+        List<Account> accountList = repository.findByIsActive(true);
+        return accountDtoConverter.convertAll(accountList);
     }
 
     public List<AccountDto> getAllAccountOnTable(int tableRequest){
@@ -68,6 +74,18 @@ public class AccountService {
         Account response = repository.save(account);
 
         return accountDtoConverter.convert(response);
+    }
+
+    public void bill(String accountId){
+        Account account = repository.findById(accountId)
+                .orElseThrow(() -> new NotFoundException("no account with this id:"+accountId+" was found" ));
+        account.getProducts().stream().map(x -> {
+           Double deneme = x.getAmount()* x.getPrice();
+        }
+        );
+
+
+
     }
 
 
