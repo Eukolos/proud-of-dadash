@@ -22,7 +22,7 @@ public class TokenGenerator {
     private long EXPIRES_ACCESS_TOKEN_MINUTE;
 
     public String generateToken(Authentication authentication) {
-        String username = ((UserDetails)authentication.getDetails()).getUsername();
+        String username = ((UserDetails)authentication.getPrincipal()).getUsername();
 
     return JWT.create()
             .withSubject(username)

@@ -7,6 +7,7 @@ import com.eukolos.restaurant.repository.EmployeeRepository;
 import com.eukolos.restaurant.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -15,6 +16,8 @@ import java.util.Arrays;
 @Component
 @RequiredArgsConstructor
 public class ProductSeed implements CommandLineRunner {
+    private final PasswordEncoder passwordEncoder;
+
     private final ProductRepository productRepository;
     private final EmployeeRepository employeeRepository;
 
@@ -22,17 +25,17 @@ public class ProductSeed implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Employee e1 = Employee.builder()
                 .username("emin")
-                .password("123123")
+                .password(passwordEncoder.encode("123123"))
                 .role(Role.ADMIN)
                 .build();
         Employee e2 = Employee.builder()
                 .username("ali")
-                .password("123123")
+                .password(passwordEncoder.encode("123123"))
                 .role(Role.ADMIN)
                 .build();
         Employee e3 = Employee.builder()
                 .username("veli")
-                .password("123123")
+                .password(passwordEncoder.encode("123123"))
                 .role(Role.ADMIN)
                 .build();
         employeeRepository.saveAll(Arrays.asList(e1,e2,e3));
