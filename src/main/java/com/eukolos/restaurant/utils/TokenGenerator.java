@@ -18,7 +18,7 @@ public class TokenGenerator {
     private String KEY;
     @Value("${jwt-variables.ISSUER}")
     private String ISSUER;
-    @Value("${EXPIRES_ACCESS_TOKEN_MINUTE}")
+    @Value("${jwt-variables.EXPIRES_ACCESS_TOKEN_MINUTE}")
     private long EXPIRES_ACCESS_TOKEN_MINUTE;
 
     public String generateToken(Authentication authentication) {

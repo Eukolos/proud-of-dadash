@@ -3,7 +3,6 @@ package com.eukolos.restaurant.security;
 import com.eukolos.restaurant.service.UserDetailsServiceImpl;
 import com.eukolos.restaurant.utils.TokenGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,15 +15,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.http.HttpHeaders;
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
-@RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
     private final TokenGenerator tokenGenerator;
     private final UserDetailsServiceImpl userDetailsService;
+
+    public JwtFilter(TokenGenerator tokenGenerator, UserDetailsServiceImpl userDetailsService) {
+        this.tokenGenerator = tokenGenerator;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

@@ -1,7 +1,8 @@
 package com.eukolos.restaurant.configuration;
 
+import com.eukolos.restaurant.security.JwtAccessDeniedHandler;
+import com.eukolos.restaurant.security.JwtAuthenticationEntryPoint;
 import com.eukolos.restaurant.security.JwtFilter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,9 +20,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
     private final JwtFilter jwtFilter;
+    private final JwtAccessDeniedHandler accessDeniedHandler;
+    private final JwtAuthenticationEntryPoint authenticationEntryPoint;
+
+    public SecurityConfig(JwtFilter jwtFilter, JwtAccessDeniedHandler accessDeniedHandler, JwtAuthenticationEntryPoint authenticationEntryPoint) {
+        this.jwtFilter = jwtFilter;
+        this.accessDeniedHandler = accessDeniedHandler;
+        this.authenticationEntryPoint = authenticationEntryPoint;
+    }
 
     @Bean
     public AuthenticationManager authenticationManager(final AuthenticationConfiguration configuration) throws Exception {
@@ -39,6 +47,9 @@ public class SecurityConfig {
                 })
                 .formLogin().disable()
                 .httpBasic().disable()
+                .exceptionHandling()
+                .accessDeniedHandler(accessDeniedHandler)
+                .authenticationEntryPoint(authenticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
@@ -46,7 +57,7 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
-        return (web -> web.ignoring().antMatchers("/auth/login/**"));
+        return (web -> web.ignoring().antMatchers("/auth/login/**","/h2-console/**"));
     }
 
     @Bean
