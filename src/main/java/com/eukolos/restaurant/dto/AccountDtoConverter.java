@@ -37,6 +37,7 @@ private final ProductDtoConverter productDtoConverter;
                .id(account.getId())
                .isActive(account.getIsActive())
                .tableNumber(account.getTableNumber())
+                .totalPrice(account.getTotalPrice())
                .createdAt(account.getCreatedAt())
                .updatedAt(account.getUpdatedAt())
                .products(productDtoList)

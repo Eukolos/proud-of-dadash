@@ -15,6 +15,7 @@ public class AccountDto {
     private Boolean isActive;
     private int tableNumber;
     private List<ProductDto> products;
+    private Double totalPrice;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
