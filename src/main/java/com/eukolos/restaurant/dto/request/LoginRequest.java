@@ -1,4 +1,4 @@
-package com.eukolos.restaurant.dto;
+package com.eukolos.restaurant.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,8 +1,8 @@
 package com.eukolos.restaurant.service;
 
-import com.eukolos.restaurant.dto.EmployeeCreateRequest;
+import com.eukolos.restaurant.dto.request.EmployeeCreateRequest;
 import com.eukolos.restaurant.dto.EmployeeDto;
-import com.eukolos.restaurant.dto.EmployeeDtoConverter;
+import com.eukolos.restaurant.dto.converter.EmployeeDtoConverter;
 import com.eukolos.restaurant.exception.NotFoundException;
 import com.eukolos.restaurant.model.Employee;
 import com.eukolos.restaurant.repository.EmployeeRepository;

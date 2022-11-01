@@ -1,5 +1,7 @@
-package com.eukolos.restaurant.dto;
+package com.eukolos.restaurant.dto.converter;
 
+import com.eukolos.restaurant.dto.AccountDto;
+import com.eukolos.restaurant.dto.ProductDto;
 import com.eukolos.restaurant.model.Account;
 import com.eukolos.restaurant.model.Product;
 import org.springframework.stereotype.Component;
@@ -36,6 +38,7 @@ private final ProductDtoConverter productDtoConverter;
         return AccountDto.builder()
                .id(account.getId())
                .isActive(account.getIsActive())
+                .status(account.getStatus())
                .tableNumber(account.getTableNumber())
                 .totalPrice(account.getTotalPrice())
                .createdAt(account.getCreatedAt())

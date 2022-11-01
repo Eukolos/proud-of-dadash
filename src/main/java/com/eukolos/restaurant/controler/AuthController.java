@@ -1,7 +1,7 @@
 package com.eukolos.restaurant.controler;
 
-import com.eukolos.restaurant.dto.LoginRequest;
-import com.eukolos.restaurant.dto.LoginResponse;
+import com.eukolos.restaurant.dto.request.LoginRequest;
+import com.eukolos.restaurant.dto.response.LoginResponse;
 import com.eukolos.restaurant.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

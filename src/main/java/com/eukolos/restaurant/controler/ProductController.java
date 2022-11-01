@@ -1,7 +1,7 @@
 package com.eukolos.restaurant.controler;
 
 
-import com.eukolos.restaurant.dto.ProductCreateRequest;
+import com.eukolos.restaurant.dto.request.ProductCreateRequest;
 import com.eukolos.restaurant.dto.ProductDto;
 import com.eukolos.restaurant.service.ProductService;
 import lombok.RequiredArgsConstructor;

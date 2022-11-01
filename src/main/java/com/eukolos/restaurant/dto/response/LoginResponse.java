@@ -1,5 +1,6 @@
-package com.eukolos.restaurant.dto;
+package com.eukolos.restaurant.dto.response;
 
+import com.eukolos.restaurant.dto.EmployeeDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.eukolos.restaurant.dto;
+package com.eukolos.restaurant.dto.response;
 
 import lombok.*;
 

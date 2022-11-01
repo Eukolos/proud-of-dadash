@@ -1,8 +1,8 @@
 package com.eukolos.restaurant.service;
 
-import com.eukolos.restaurant.dto.EmployeeDtoConverter;
-import com.eukolos.restaurant.dto.LoginRequest;
-import com.eukolos.restaurant.dto.LoginResponse;
+import com.eukolos.restaurant.dto.converter.EmployeeDtoConverter;
+import com.eukolos.restaurant.dto.request.LoginRequest;
+import com.eukolos.restaurant.dto.response.LoginResponse;
 import com.eukolos.restaurant.exception.NotFoundException;
 import com.eukolos.restaurant.utils.TokenGenerator;
 import org.springframework.security.authentication.AuthenticationManager;
