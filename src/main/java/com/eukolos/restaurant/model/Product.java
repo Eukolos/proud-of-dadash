@@ -24,5 +24,5 @@ public class Product {
 
     private double price;
 
-    private boolean unique;
+    private boolean uniquee;
 }

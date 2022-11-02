@@ -21,7 +21,7 @@ public class ProductService {
         Product product = Product.builder()
                 .name(productCreateRequest.getName())
                 .price(productCreateRequest.getPrice())
-                .unique(true)
+                .uniquee(true)
                 .build();
         Product response = repository.save(product);
 
@@ -33,7 +33,7 @@ public class ProductService {
         https://vladmihalcea.com/spring-data-findall-anti-pattern/
         List<Product> productList = repository.findAll();
          */
-        List<Product> productList = repository.findAllByUnique(true);
+        List<Product> productList = repository.findAllByUniquee(true);
 
         return productDtoConverter.convertAll(productList);
     }

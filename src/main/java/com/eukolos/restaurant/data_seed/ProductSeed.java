@@ -44,22 +44,27 @@ public class ProductSeed implements CommandLineRunner {
         Product p1 = Product.builder()
                 .name("Döner")
                 .price(15)
+                .uniquee(true)
                 .build();
         Product p2 = Product.builder()
                 .name("Pilav")
                 .price(30)
+                .uniquee(true)
                 .build();
         Product p3 = Product.builder()
                 .name("Kanat")
                 .price(50)
+                .uniquee(true)
                 .build();
         Product p4 = Product.builder()
                 .name("İskender")
                 .price(60)
+                .uniquee(true)
                 .build();
         Product p5 = Product.builder()
                 .name("Tavuk Wrap")
                 .price(40)
+                .uniquee(true)
                 .build();
         productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 
