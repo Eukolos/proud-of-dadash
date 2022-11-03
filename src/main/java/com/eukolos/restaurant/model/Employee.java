@@ -22,6 +22,7 @@ public class Employee {
     @Column(unique = true)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)

@@ -23,9 +23,10 @@ public class EmployeeService {
 
 
     public EmployeeDto createEmployee(EmployeeCreateRequest request){
+        String password = passwordEncoder.encode(request.getPassword());
         Employee employee = new Employee();
         employee.setUsername(request.getUsername());
-        employee.setPassword(passwordEncoder.encode(request.getPassword()));
+        employee.setPassword(password);
         employee.setRole(request.getRole());
 
         return employeeDtoConverter.convert(repository.save(employee));

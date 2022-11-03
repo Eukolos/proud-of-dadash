@@ -20,7 +20,7 @@ public class AuthController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public EmployeeDto createEmployee(EmployeeCreateRequest employeeCreateRequest){
+    public EmployeeDto createEmployee(@RequestBody EmployeeCreateRequest employeeCreateRequest){
         return employeeService.createEmployee(employeeCreateRequest);
     }
 
