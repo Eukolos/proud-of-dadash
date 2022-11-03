@@ -14,5 +14,4 @@ public class EmployeeCreateRequest {
         private String password;
 
         private Role role;
-
 }

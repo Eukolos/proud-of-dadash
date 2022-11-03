@@ -36,7 +36,7 @@ public class AccountController {
         return service.getAllActiveAccount();
     }
 
-    @GetMapping("/{getTable}")
+    @GetMapping("/table/{getTable}")
     public List<AccountDto> getAllAccountOnTable(@PathVariable int getTable){
         return service.getAllAccountOnTable(getTable);
     }

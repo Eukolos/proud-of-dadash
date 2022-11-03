@@ -42,10 +42,11 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().and()
                 .authorizeRequests((auth) ->{
-                    auth.antMatchers("/auth/**","/account/create","/product/create").hasAnyAuthority("ADMIN");
-                    auth.antMatchers("/product","/account/create","/account","/account/active","/account/{getTable}","/account/order","/account/readyforpickup","/account/delivered/{id}","/account/cancelled/{id}").hasAnyAuthority("ADMIN","WAITER");
-                    auth.antMatchers("/product","/account/approved","/account/{preparing}","/account/readyforpickup","/account/cancelled/{id}").hasAnyAuthority("ADMIN","CHEF");
-                    auth.antMatchers("/product","/bill/{accountId}","/bill/payment").hasAnyAuthority("ADMIN","CASHIER");
+                    auth.antMatchers("/account/create","/product/create","/auth/create/**").hasAnyAuthority("ADMIN");
+               //   auth.antMatchers("/product/**","/account/**").hasAnyAuthority("ADMIN","WAITER","CHEF","CASHIER");
+                    auth.antMatchers("/product","/account/create","/account","/account/table/**","/account/active","/account/**","/account/order","/account/readyforpickup","/account/delivered/**","/account/cancelled/**").hasAnyAuthority("ADMIN","WAITER");
+                    auth.antMatchers("/product","/account/approved","/account/**","/account/readyforpickup","/account/cancelled/**").hasAnyAuthority("ADMIN","CHEF");
+                    auth.antMatchers("/product","/bill/**","/bill/payment").hasAnyAuthority("ADMIN","CASHIER");
                     auth.anyRequest().authenticated();
                 })
                 .formLogin().disable()
