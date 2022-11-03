@@ -42,7 +42,10 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().and()
                 .authorizeRequests((auth) ->{
-                    auth.antMatchers("/account").hasAnyAuthority("ADMIN","CHEF","WAITER","CASHIER");
+                    auth.antMatchers("/auth/**","/account/create","/product/create").hasAnyAuthority("ADMIN");
+                    auth.antMatchers("/product","/account/create","/account","/account/active","/account/{getTable}","/account/order","/account/readyforpickup","/account/delivered/{id}","/account/cancelled/{id}").hasAnyAuthority("ADMIN","WAITER");
+                    auth.antMatchers("/product","/account/approved","/account/{preparing}","/account/readyforpickup","/account/cancelled/{id}").hasAnyAuthority("ADMIN","CHEF");
+                    auth.antMatchers("/product","/bill/{accountId}","/bill/payment").hasAnyAuthority("ADMIN","CASHIER");
                     auth.anyRequest().authenticated();
                 })
                 .formLogin().disable()

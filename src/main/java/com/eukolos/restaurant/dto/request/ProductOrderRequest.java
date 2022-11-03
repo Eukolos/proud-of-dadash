@@ -1,4 +1,4 @@
-package com.eukolos.restaurant.dto;
+package com.eukolos.restaurant.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
-public class PaymentRequest {
+@Data @AllArgsConstructor @NoArgsConstructor @Builder
+public class ProductOrderRequest {
     @NotEmpty
-    private String accountId;
+    private String id;
     @Min(0)
-    private Double payment;
+    private double amount;
 }

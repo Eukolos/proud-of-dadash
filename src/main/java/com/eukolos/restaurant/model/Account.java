@@ -28,6 +28,9 @@ public class Account {
     @ManyToMany
     private List<Product> products;
 
+    @Enumerated(EnumType.STRING)
+    private AccountStatus status;
+
     @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;

@@ -1,6 +1,6 @@
-package com.eukolos.restaurant.dto;
+package com.eukolos.restaurant.dto.converter;
 
-import com.eukolos.restaurant.model.Account;
+import com.eukolos.restaurant.dto.ProductDto;
 import com.eukolos.restaurant.model.Product;
 import org.springframework.stereotype.Component;
 

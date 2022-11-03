@@ -1,9 +1,9 @@
 package com.eukolos.restaurant.service;
 
-import com.eukolos.restaurant.dto.ProductCreateRequest;
+import com.eukolos.restaurant.dto.request.ProductCreateRequest;
 import com.eukolos.restaurant.dto.ProductDto;
-import com.eukolos.restaurant.dto.ProductDtoConverter;
-import com.eukolos.restaurant.dto.ProductOrderRequest;
+import com.eukolos.restaurant.dto.converter.ProductDtoConverter;
+import com.eukolos.restaurant.dto.request.ProductOrderRequest;
 import com.eukolos.restaurant.exception.NotFoundException;
 import com.eukolos.restaurant.model.Product;
 import com.eukolos.restaurant.repository.ProductRepository;
@@ -21,6 +21,7 @@ public class ProductService {
         Product product = Product.builder()
                 .name(productCreateRequest.getName())
                 .price(productCreateRequest.getPrice())
+                .uniquee(true)
                 .build();
         Product response = repository.save(product);
 
@@ -28,7 +29,11 @@ public class ProductService {
     }
 
     public List<ProductDto> getAllProduct() {
+        /*
+        https://vladmihalcea.com/spring-data-findall-anti-pattern/
         List<Product> productList = repository.findAll();
+         */
+        List<Product> productList = repository.findAllByUniquee(true);
 
         return productDtoConverter.convertAll(productList);
     }

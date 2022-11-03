@@ -1,7 +1,7 @@
-package com.eukolos.restaurant.dto;
+package com.eukolos.restaurant.dto.converter;
 
+import com.eukolos.restaurant.dto.EmployeeDto;
 import com.eukolos.restaurant.model.Employee;
-import com.eukolos.restaurant.model.Product;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
 package com.eukolos.restaurant.dto;
 
+import com.eukolos.restaurant.model.AccountStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ public class AccountDto {
     private Boolean isActive;
     private int tableNumber;
     private List<ProductDto> products;
+    private AccountStatus status;
     private Double totalPrice;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

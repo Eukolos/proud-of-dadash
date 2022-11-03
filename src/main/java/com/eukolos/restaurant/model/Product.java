@@ -23,4 +23,6 @@ public class Product {
     private double amount;
 
     private double price;
+
+    private boolean uniquee;
 }
